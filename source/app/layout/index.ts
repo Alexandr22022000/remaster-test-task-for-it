@@ -8,14 +8,4 @@ import * as TYPES from './store/types';
 @Component({
   template: require('./template.pug')
 })
-export default class Layout extends Vue {
-
-  @State(state => state.layout.phrase) phrase: string;
-
-  @Action(TYPES.A_SOME_ACTION) togglePhrase;
-
-  private onButtonClickHandler() {
-    this.togglePhrase();
-  }
-
-}
+export default class Layout extends Vue {}
