@@ -3,32 +3,8 @@ import { action, module, mutation } from 'vuex-ts-decorators';
 import * as TYPES from './types';
 import { VueRouter } from 'vue-router/types/router';
 import router from '../router/routers'
-
-
-type state = {
-  status: string,
-  username: string,
-  search: string 
-}
-
-type item = {
-  name: string,
-  img: string,
-  id: number
-}
-
-type list = {
-  scroll: number,
-  banner: string,
-  items: item[],
-
-}
-
-type userData = {
-  id: number,
-  name: string,
-  img: string
-}
+import {state, item, list, userData} from './typesData';
+import {Status, Banner} from './applicationStats';
 
 @module
 export default class LayoutStore extends TypedStore {
@@ -42,19 +18,18 @@ export default class LayoutStore extends TypedStore {
   private TEST_USER: userData = 
     {id: 1, name: 'Vasa', img: 'https://softboard.ru/uploads/profile/photo-thumb-119634.jpg'};  
 
+    
   public token: string = '';
   public state: state = {
-    status: '',
+    status: Status.OK,
     username: '',
     search: ''
   }
-
   public list: list = {
     scroll: 0,
     banner: '',
     items: []
   }
-
   public userData: userData = {
     id: -1,
     name: '',
@@ -111,12 +86,12 @@ export default class LayoutStore extends TypedStore {
 
   @mutation
   [TYPES.M_STORE_ERROR_REQUEST]() {
-    this.state.status = '';
+    this.state.status = Status.ERROR;
   }
 
   @mutation
   [TYPES.M_STORE_START_REQUEST]() {
-    this.state.status = '';
+    this.state.status = Status.REQUESTING;
   }
 
   @mutation
