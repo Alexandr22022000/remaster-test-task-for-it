@@ -1,0 +1,11 @@
+{
+  "options": [
+    "setClasses",
+    "mq"
+  ],
+  "feature-detects": [
+    "test/css/flexbox",
+    "test/es6/promises",
+    "test/serviceworker"
+  ]
+}
