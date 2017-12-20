@@ -1,2 +1,14 @@
-export const A_SOME_ACTION = 'A_SOME_ACTION';
-export const M_SOME_MUTATION = 'M_SOME_MUTATION';
+export const A_GET_VK_AUTH_TOKEN = 'A_GET_VK_AUTH_TOKEN';
+export const A_GET_USERS = 'A_GET_USERS';
+export const A_GET_MORE_USERS = 'A_GET_MORE_USERS';
+export const A_SET_USER_ID = 'A_SET_USER_ID';
+export const A_GET_USER_DATA = 'A_GET_USER_DATA';
+export const A_GO_TO_BACK = 'A_GO_TO_BACK';
+
+export const M_STORE_START_REQUEST = 'M_STORE_START_REQUEST';
+export const M_STORE_ERROR_REQUEST = 'M_STORE_ERROR_REQUEST';
+export const M_STORE_VK_AUTH_TOKEN = 'M_STORE_VK_AUTH_TOKEN';
+export const M_STORE_ADD_USERS = 'M_STORE_ADD_USERS';
+export const M_STORE_CLEAN_USERS_LIST = 'M_STORE_CLEAN_USERS_LIST';
+export const M_STORE_USER_ID = 'M_STORE_USER_ID';
+export const M_STORE_USER_DATA = 'M_STORE_USER_DATA';
