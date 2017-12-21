@@ -19,11 +19,11 @@ export default class LayoutStore extends TypedStore {
     {id: 1, name: 'Vasa', img: 'https://softboard.ru/uploads/profile/photo-thumb-119634.jpg'};
 
 
-  public token: string = '';
+  public token: string = 'asdasds';
   public stateApp: state = {
     status: Status.OK,
-    username: '',
-    search: ''
+    username: 'USER',
+    query: 'asdasdsaadasd'
   };
   public list: list = {
     scroll: 0,
@@ -43,7 +43,8 @@ export default class LayoutStore extends TypedStore {
   }
 
   @action
-  [TYPES.A_GET_USERS]() {
+  [TYPES.A_GET_USERS](query: string) {
+    this.commit(TYPES.M_STORE_QUERY, query);
     this.commit(TYPES.M_STORE_ADD_USERS, this.TEST_USERS);
   }
 
@@ -72,6 +73,11 @@ export default class LayoutStore extends TypedStore {
   @mutation
   [TYPES.M_STORE_VK_AUTH_TOKEN](token: string) {
     this.token = token;
+  }
+
+  @mutation
+  [TYPES.M_STORE_QUERY](query: string) {
+    this.stateApp.query = query;
   }
 
   @mutation

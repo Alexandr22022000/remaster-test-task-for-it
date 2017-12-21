@@ -6,6 +6,7 @@ export const A_GET_USER_DATA = 'A_GET_USER_DATA';
 export const A_GO_TO_BACK = 'A_GO_TO_BACK';
 
 export const M_STORE_START_REQUEST = 'M_STORE_START_REQUEST';
+export const M_STORE_QUERY = 'M_STORE_QUERY';
 export const M_STORE_ERROR_REQUEST = 'M_STORE_ERROR_REQUEST';
 export const M_STORE_VK_AUTH_TOKEN = 'M_STORE_VK_AUTH_TOKEN';
 export const M_STORE_ADD_USERS = 'M_STORE_ADD_USERS';

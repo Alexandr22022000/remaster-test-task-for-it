@@ -3,7 +3,7 @@ import {Status} from './applicationStats';
 export type state = {
     status: Status,
     username: string,
-    search: string
+    query: string
 }
 
 export type item = {

@@ -2,4 +2,4 @@ div
     button(@click="back()" v-show="currentRoute == 'UserPage'") back
     input#input-search(v-model="query")
     button(@click="search()") search
-    h1 {{query}}
+    h1 {{getStatus}}
