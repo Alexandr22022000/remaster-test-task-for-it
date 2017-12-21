@@ -1,29 +1,18 @@
 import TypedStore from '../../core/store/typedstore';
 import { action, module, mutation } from 'vuex-ts-decorators';
 import * as TYPES from './types';
-import { VueRouter } from 'vue-router/types/router';
+import Request from '../../core/request';
 import router from '../router/routers';
 import {state, item, list, userData} from './typesData';
 import {Status, Banner} from './applicationStats';
 
 @module
 export default class LayoutStore extends TypedStore {
-  /*
-  TEST_TEST_TEST
-  */
-  private TEST_USERS: item[] = [
-    {id: 1, name: 'Vasa', img: 'https://softboard.ru/uploads/profile/photo-thumb-119634.jpg'},
-    {id: 1, name: 'Vasa', img: 'https://softboard.ru/uploads/profile/photo-thumb-119634.jpg'}
-  ];
-  private TEST_USER: userData =
-    {id: 1, name: 'Vasa', img: 'https://softboard.ru/uploads/profile/photo-thumb-119634.jpg'};
-
-
-  public token: string = 'asdasds';
+  public token: string = '6cb73bab05de52dec76af86ae08f2826e79ba1d97dae34b649860dee21979618d8214715db3873832fba7';
   public stateApp: state = {
     status: Status.OK,
-    username: 'USER',
-    query: 'asdasdsaadasd'
+    username: '',
+    query: ''
   };
   public list: list = {
     scroll: 0,
@@ -32,36 +21,55 @@ export default class LayoutStore extends TypedStore {
   };
   public userData: userData = {
     id: -1,
-    name: 'sfsdsdfsd',
-    img: 'https://softboard.ru/uploads/profile/photo-thumb-119634.jpg'
+    name: '',
+    img: ''
   };
 
 
   @action
   [TYPES.A_GET_VK_AUTH_TOKEN]() {
-    this.commit(TYPES.M_STORE_VK_AUTH_TOKEN, 'token');
+    this.commit(TYPES.M_STORE_VK_AUTH_TOKEN, '6cb73bab05de52dec76af86ae08f2826e79ba1d97dae34b649860dee21979618d8214715db3873832fba7');
   }
 
   @action
   [TYPES.A_GET_USERS](query: string) {
     this.commit(TYPES.M_STORE_QUERY, query);
-    this.commit(TYPES.M_STORE_ADD_USERS, this.TEST_USERS);
+    this.commit(TYPES.M_STORE_START_REQUEST);
+    this.commit(TYPES.M_STORE_CLEAN_USERS_LIST);
+    Request.getUsersList(query, 10, 0, this.token, (error: any, data: item[]) => {
+      if (error) return this.commit(TYPES.M_STORE_ERROR_REQUEST);
+
+      this.commit(TYPES.M_STORE_ADD_USERS, data);
+      this.commit(TYPES.M_STORE_OK_REQUEST);
+    });
   }
 
   @action
   [TYPES.A_GET_MORE_USERS]() {
-    this.commit(TYPES.M_STORE_ADD_USERS, this.TEST_USERS);
+    this.commit(TYPES.M_STORE_START_REQUEST);
+    Request.getUsersList(this.stateApp.query, 10, this.list.items.length, this.token, (error: any, data: item[]) => {
+      if (error) return this.commit(TYPES.M_STORE_ERROR_REQUEST);
+
+      this.commit(TYPES.M_STORE_ADD_USERS, data);
+      this.commit(TYPES.M_STORE_OK_REQUEST);
+    });
   }
 
   @action
-  [TYPES.A_SET_USER_ID]() {
+  [TYPES.A_SET_USER_ID](id: number) {
     router.push({name: 'UserPage'});
-    this.commit(TYPES.M_STORE_USER_ID, 50);
+    this.commit(TYPES.M_STORE_USER_ID, id);
   }
 
   @action
   [TYPES.A_GET_USER_DATA]() {
-    this.commit(TYPES.M_STORE_USER_DATA, this.TEST_USER);
+    this.commit(TYPES.M_STORE_START_REQUEST);
+    Request.getUserData(this.userData.id, this.token, (error: any, data: userData) => {
+      if (error) return this.commit(TYPES.M_STORE_ERROR_REQUEST);
+
+      this.commit(TYPES.M_STORE_USER_DATA, data);
+      this.commit(TYPES.M_STORE_OK_REQUEST);
+    });
   }
 
   @action
@@ -99,6 +107,11 @@ export default class LayoutStore extends TypedStore {
   [TYPES.M_STORE_START_REQUEST]() {
     this.stateApp.status = Status.REQUESTING;
   }
+
+@mutation
+  [TYPES.M_STORE_OK_REQUEST]() {
+  this.stateApp.status = Status.OK;
+}
 
   @mutation
   [TYPES.M_STORE_USER_ID](id: number) {
