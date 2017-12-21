@@ -32,8 +32,8 @@ export default class LayoutStore extends TypedStore {
   };
   public userData: userData = {
     id: -1,
-    name: '',
-    img: ''
+    name: 'sfsdsdfsd',
+    img: 'https://softboard.ru/uploads/profile/photo-thumb-119634.jpg'
   };
 
 
