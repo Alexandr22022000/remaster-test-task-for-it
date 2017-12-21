@@ -19,27 +19,11 @@ export default class Navbar extends Vue {
     @Action(TYPES.A_GO_TO_BACK) goToBack;
 
 
-    @State(state => console.log("AAAAA")) status: string;
-
-    //private status: string = 'AAA';
+    @State(state => state.layout.stateApp.status) status: Status;
 
 
     get getStatus(): string {
-        return this.$store.state.token;
-
-        /*switch (this.status) {
-            case Status.OK:
-                return "OK";
-
-            case Status.REQUESTING:
-                return "REQUESTING";
-
-            case Status.ERROR:
-                return "ERROR";
-
-            default:
-                return "ERROR";
-        }*/
+        return this.status;
     }
 
     get currentRoute(): string {
