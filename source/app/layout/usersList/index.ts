@@ -21,6 +21,7 @@ export default class UsersList extends Vue {
   }
 
   private onScroll () {
+    console.log(this.banner);
     if (document.body.scrollHeight - window.innerHeight - document.scrollingElement.scrollTop <= 10 && this.banner === Banner.NONE) {
       this.getMoreUsers();
     }
@@ -32,4 +33,8 @@ export default class UsersList extends Vue {
 
 
   @Action(TYPES.A_GET_MORE_USERS) getMoreUsers;
+
+  get bannerText (): string {
+    return this.banner;
+  }
 }

@@ -101,16 +101,19 @@ export default class LayoutStore extends TypedStore {
   @mutation
   [TYPES.M_STORE_ERROR_REQUEST]() {
     this.stateApp.status = Status.ERROR;
+    this.list.banner = Banner.ERROR;
   }
 
   @mutation
   [TYPES.M_STORE_START_REQUEST]() {
     this.stateApp.status = Status.REQUESTING;
+    this.list.banner = Banner.REQUESTING;
   }
 
 @mutation
   [TYPES.M_STORE_OK_REQUEST]() {
   this.stateApp.status = Status.OK;
+  this.list.banner = Banner.NONE;
 }
 
   @mutation
