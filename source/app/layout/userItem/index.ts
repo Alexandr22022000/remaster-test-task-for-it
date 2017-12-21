@@ -3,27 +3,27 @@ import Component from 'vue-class-component';
 import { State, Action } from 'vuex-class';
 import * as TYPES from '../store/types';
 import {item} from '../store/typesData';
+import {Prop} from "vue-property-decorator";
 import './style.scss';
-
-declare module 'vue/types/vue' {
-  interface Vue {
-    myProperty: item;
-  }
-}
 
 @Component({
   template: require('./template.pug')
 })
 
 export default class UserItem extends Vue {
-  @Action(TYPES.A_SET_USER_ID) getUsers;
+  @Action(TYPES.A_SET_USER_ID) getUser;
+
+  @Prop() myProperty: item;
 
   private showDetails () {
-    this.getUsers();
+    this.getUser(this.myProperty.id);
   }
 
-  get item () {
-    //console.log(this);
-    return this.$props;
+  get name () {
+    return this.myProperty.name;
+  }
+
+  get img () {
+    return this.myProperty.img;
   }
 }

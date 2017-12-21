@@ -106,7 +106,7 @@ export default class LayoutStore extends TypedStore {
   }
 
   @mutation
-  [TYPES.M_STORE_USER_ID](data: userData) {
+  [TYPES.M_STORE_USER_DATA](data: userData) {
     this.userData = data;
   }
 }
