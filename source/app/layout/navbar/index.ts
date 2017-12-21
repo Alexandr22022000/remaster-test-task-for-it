@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import {Status} from '../store/applicationStats';
 import { State, Action } from 'vuex-class';
-import TYPES from '../store/types';
+import * as TYPES from '../store/types';
 import './style.scss';
 
 @Component({
@@ -10,12 +10,12 @@ import './style.scss';
 })
 
 export default class Navbar extends Vue {
-    private query: string;
+    private query: string = '';
 
 
-    //@Action(TYPES.A_GET_USERS) getUsers;
+    @Action(TYPES.A_GET_USERS) getUsers;
 
-    //@Action(TYPES.A_GO_TO_BACK) goToBack;
+    @Action(TYPES.A_GO_TO_BACK) goToBack;
 
 
     @State(state => state.stateApp.status) status: Status;
@@ -26,11 +26,11 @@ export default class Navbar extends Vue {
     }
 
 
-    /*search () {
+    search () {
         this.getUsers(this.query);
-    }*/
+    }
 
-    /*private back () {
+    private back () {
       this.goToBack();
-    }*/
+    }
 }

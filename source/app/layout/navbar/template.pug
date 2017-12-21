@@ -1,4 +1,5 @@
 div
-    //input#input-search(v-model="q")
-    //button(@click="search()")
-    h1 NAVBAR
+    button(@click="back()" v-show="currentRoute == 'UserPage'") back
+    input#input-search(v-model="query")
+    button(@click="search()") search
+    h1 {{query}}
