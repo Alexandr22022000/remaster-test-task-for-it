@@ -9,16 +9,16 @@ import './style.scss';
     template: require('./template.pug')
 })
 
-export default class Navbar extends Vue {    
+export default class Navbar extends Vue {
     private query: string;
 
 
-    @Action(TYPES.A_GET_USERS) getUsers;
+    //@Action(TYPES.A_GET_USERS) getUsers;
 
-    @Action(TYPES.A_GO_TO_BACK) goToBack;
+    //@Action(TYPES.A_GO_TO_BACK) goToBack;
 
 
-    @State(state => state.state.status) status: Status;
+    @State(state => state.stateApp.status) status: Status;
 
 
     get getStatus(): string {
@@ -26,7 +26,11 @@ export default class Navbar extends Vue {
     }
 
 
-    search () {
+    /*search () {
         this.getUsers(this.query);
-    }
+    }*/
+
+    /*private back () {
+      this.goToBack();
+    }*/
 }

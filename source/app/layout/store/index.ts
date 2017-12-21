@@ -2,7 +2,7 @@ import TypedStore from '../../core/store/typedstore';
 import { action, module, mutation } from 'vuex-ts-decorators';
 import * as TYPES from './types';
 import { VueRouter } from 'vue-router/types/router';
-import router from '../router/routers'
+import router from '../router/routers';
 import {state, item, list, userData} from './typesData';
 import {Status, Banner} from './applicationStats';
 
@@ -15,26 +15,26 @@ export default class LayoutStore extends TypedStore {
     {id: 1, name: 'Vasa', img: 'https://softboard.ru/uploads/profile/photo-thumb-119634.jpg'},
     {id: 1, name: 'Vasa', img: 'https://softboard.ru/uploads/profile/photo-thumb-119634.jpg'}
   ];
-  private TEST_USER: userData = 
-    {id: 1, name: 'Vasa', img: 'https://softboard.ru/uploads/profile/photo-thumb-119634.jpg'};  
+  private TEST_USER: userData =
+    {id: 1, name: 'Vasa', img: 'https://softboard.ru/uploads/profile/photo-thumb-119634.jpg'};
 
-    
+
   public token: string = '';
-  public state: state = {
+  public stateApp: state = {
     status: Status.OK,
     username: '',
     search: ''
-  }
+  };
   public list: list = {
     scroll: 0,
     banner: '',
     items: []
-  }
+  };
   public userData: userData = {
     id: -1,
     name: '',
     img: ''
-  }
+  };
 
 
   @action
@@ -86,12 +86,12 @@ export default class LayoutStore extends TypedStore {
 
   @mutation
   [TYPES.M_STORE_ERROR_REQUEST]() {
-    this.state.status = Status.ERROR;
+    this.stateApp.status = Status.ERROR;
   }
 
   @mutation
   [TYPES.M_STORE_START_REQUEST]() {
-    this.state.status = Status.REQUESTING;
+    this.stateApp.status = Status.REQUESTING;
   }
 
   @mutation
