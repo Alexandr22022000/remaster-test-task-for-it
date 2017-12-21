@@ -15,6 +15,7 @@
   "dependencies": {
     "@types/modernizr": "^3.5.1",
     "axios": "^0.17.1",
+    "jsonp": "^0.2.1",
     "modernizr": "^3.5.0",
     "moment": "^2.19.4",
     "vue": "^2.5.11",
