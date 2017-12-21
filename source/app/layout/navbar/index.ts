@@ -2,9 +2,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import {Status} from '../store/applicationStats';
 import { State, Action } from 'vuex-class';
-import { Watch } from "vue-property-decorator";
 import * as TYPES from '../store/types';
-import router from '../router/routers';
 import './style.scss';
 
 @Component({

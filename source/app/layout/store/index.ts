@@ -27,7 +27,7 @@ export default class LayoutStore extends TypedStore {
   };
   public list: list = {
     scroll: 0,
-    banner: '',
+    banner: Banner.NONE,
     items: []
   };
   public userData: userData = {

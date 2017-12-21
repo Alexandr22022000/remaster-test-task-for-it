@@ -4,23 +4,23 @@ export type state = {
     status: Status,
     username: string,
     query: string
-}
+};
 
 export type item = {
     name: string,
     img: string,
     id: number
-}
+};
 
 export type list = {
     scroll: number,
     banner: string,
     items: item[],
 
-}
+};
 
 export type userData = {
     id: number,
     name: string,
     img: string
-}
+};
