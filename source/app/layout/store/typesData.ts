@@ -22,5 +22,9 @@ export type list = {
 export type userData = {
     id: number,
     name: string,
-    img: string
+    img: string,
+    bdate: string,
+    city: string,
+    country: string,
+    education: string
 };

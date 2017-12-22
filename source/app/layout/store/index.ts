@@ -22,7 +22,11 @@ export default class LayoutStore extends TypedStore {
   public userData: userData = {
     id: -1,
     name: '',
-    img: ''
+    img: '',
+    bdate: '',
+    city: '',
+    country: '',
+    education: ''
   };
 
 

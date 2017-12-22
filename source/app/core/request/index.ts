@@ -32,7 +32,7 @@ export default class Requset {
         userList.push({
           name: data[i].first_name + ' ' + data[i].last_name,
           id: data[i].uid,
-          img: data[i].photo_100
+          img: data[i].photo_100,
         });
       }
 
@@ -43,7 +43,7 @@ export default class Requset {
   public static getUserData (id: number, token: string, callback: (error: any, data: userData) => void) {
     this.get(REQUEST.METHOD_USER, {
         'access_token': token,
-        'fields': REQUEST.PARAM_FIELDS,
+        'fields': REQUEST.PARAM_FIELDS_MORE,
         'user_ids': id
       },
       (error, data) => {
@@ -51,11 +51,16 @@ export default class Requset {
 
         let user: userData = {
           name: data[0].first_name + ' ' + data[0].last_name,
+          id: data[0].uid,
           img: data[0].photo_100,
-          id: data[0].uid
+          bdate: data[0].bdate,
+          city: data[0].city,
+          country: data[0].country,
+          education: data[0].education
+
         };
 
-        console.log(id + ' = ' + user.name);
+        console.log(data[0].city);
 
         callback(null, user);
       });

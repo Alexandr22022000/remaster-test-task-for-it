@@ -17,6 +17,14 @@ export default class UserPage extends Vue {
 
   @State(state => state.layout.userData.id) id: number;
 
+  @State(state => state.layout.userData.bdate) bdate: string;
+
+  @State(state => state.layout.userDate.city) city: string;
+
+  @State(state => state.layout.userDate.country) country: string;
+
+  @State(state => state.layout.userDate.education) education: string;
+
   constructor () {
     super();
     this.getUserData();
