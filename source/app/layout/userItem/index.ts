@@ -4,7 +4,8 @@ import { State, Action } from 'vuex-class';
 import * as TYPES from '../store/types';
 import {item} from '../store/typesData';
 import {Prop} from "vue-property-decorator";
-import './style.scss';
+// import './style.scss';
+import './styles.sass'
 
 @Component({
   template: require('./template.pug')
