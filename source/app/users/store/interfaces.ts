@@ -23,4 +23,5 @@ export interface IUserData {
     img: string;
     bdate: string;
     city: string;
+    age: string;
 }

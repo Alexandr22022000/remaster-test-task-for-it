@@ -24,7 +24,8 @@ export default class UsersStore extends TypedStore {
     name: '',
     img: '',
     bdate: '',
-    city: ''
+    city: '',
+    age: ''
   };
 
 
@@ -165,12 +166,18 @@ export default class UsersStore extends TypedStore {
 
   @mutation
   [TYPES.M_STORE_USER_DATA](data: any) {
+    let date: Date | number = new Date(data.bdate);
+    if (date.toString() !== 'Invalid Date') {
+      date = new Date().getFullYear() - date.getFullYear();
+    }
+
     this.userData = {
-      id: data.uid,
+      id: data.id,
       name: `${data.first_name} ${data.last_name}`,
       img: data.photo_100,
       bdate: data.bdate ? data.bdate : 'Скрыто',
-      city: data.city.title ? data.city.title : 'Скрыто'
+      city: data.city.title ? data.city.title : 'Скрыто',
+      age: (date.toString() !== 'Invalid Date') ? date.toString() : "Скрыто"
     };
   }
 }

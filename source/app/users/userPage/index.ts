@@ -21,6 +21,8 @@ export default class UserPage extends Vue {
 
   @State(state => state.users.userData.city) city: string;
 
+  @State(state => state.users.userData.age) age: string;
+
   constructor () {
     super();
     this.getUserData();
