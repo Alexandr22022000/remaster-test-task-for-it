@@ -1,13 +1,13 @@
 import TypedStore from './typedstore';
 import { module } from 'vuex-ts-decorators';
-import LayoutStore from '../../layout/store';
+import UsersStore from '../../users/store';
 
 @module({
   store: true,
   modules: {
-    layout: new LayoutStore()
+    users: new UsersStore()
   }
 })
 export default class ApplicationStore extends TypedStore {
-  private layout: LayoutStore;
+  private usersStore: UsersStore;
 }

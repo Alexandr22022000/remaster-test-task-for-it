@@ -1,13 +1,13 @@
 import TypedStore from '../../core/store/typedstore';
 import { action, module, mutation } from 'vuex-ts-decorators';
 import * as TYPES from './types';
-import Request from '../../core/request';
-import router from '../router/routers';
+import Request from '../../core/request/index';
+import router from '../../layout/router/routers';
 import {state, item, list, userData} from './typesData';
-import {Status, Banner} from './applicationStats';
+import {Status, Banner} from './appState';
 
 @module
-export default class LayoutStore extends TypedStore {
+export default class UsersStore extends TypedStore {
   public token: string = '6cb73bab05de52dec76af86ae08f2826e79ba1d97dae34b649860dee21979618d8214715db3873832fba7';
   public stateApp: state = {
     status: Status.OK,

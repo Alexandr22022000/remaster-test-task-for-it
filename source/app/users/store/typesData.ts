@@ -1,4 +1,4 @@
-import {Status} from './applicationStats';
+import {Status} from './appState';
 
 export type state = {
     status: Status,

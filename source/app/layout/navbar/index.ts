@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import {Status} from '../store/applicationStats';
+import {Status} from '../../users/store/appState';
 import { State, Action } from 'vuex-class';
-import * as TYPES from '../store/types';
+import * as TYPES from '../../users/store/types';
 import './style.scss';
 
 @Component({
@@ -17,7 +17,7 @@ export default class Navbar extends Vue {
     @Action(TYPES.A_GO_TO_BACK) goToBack;
 
 
-    @State(state => state.layout.stateApp.status) status: Status;
+    @State(state => state.users.stateApp.status) status: Status;
 
 
     get getStatus(): string {

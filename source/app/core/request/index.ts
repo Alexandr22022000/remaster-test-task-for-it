@@ -1,6 +1,6 @@
 import jsonp from 'jsonp';
 import * as REQUEST from './constants';
-import {item, userData} from '../../layout/store/typesData';
+import {item, userData} from '../../users/store/typesData';
 
 export default class Requset {
   public static get (method: string, params: any, callback: (error: any, data: any) => void): void {
