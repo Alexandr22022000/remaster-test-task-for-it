@@ -5,4 +5,7 @@ import {URL_VK} from './constants';
 export const HTTP = axios.create({
   baseURL: URL_VK,
   adapter: jsonpAdapter,
+  params: {
+    v: 5.52
+  }
 });

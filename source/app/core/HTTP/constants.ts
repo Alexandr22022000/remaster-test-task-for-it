@@ -4,4 +4,4 @@ export const METHOD_SEARCH = 'users.search';
 export const METHOD_USER = 'users.get';
 
 export const PARAM_FIELDS = 'photo_100, first_name, last_name';
-export const PARAM_FIELDS_MORE = 'photo_100, bdate, city, country, education';
+export const PARAM_FIELDS_MORE = 'photo_100, bdate, city';

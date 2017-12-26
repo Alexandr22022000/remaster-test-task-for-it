@@ -45,12 +45,13 @@ export default class UsersStore extends TypedStore {
     HTTP.get(METHOD_SEARCH, {
       params: {
         q: query,
+        count: 10,
         access_token: this.token,
         fields: PARAM_FIELDS
       }
     })
       .then((response) => {
-        this.commit(TYPES.M_STORE_ADD_USERS, response.data['response']);
+        this.commit(TYPES.M_STORE_ADD_USERS, response.data['response']['items']);
         this.commit(TYPES.M_STORE_OK_REQUEST);
       })
       .catch((error) => {
@@ -66,12 +67,14 @@ export default class UsersStore extends TypedStore {
     HTTP.get(METHOD_SEARCH, {
       params: {
         q: this.stateApp.query,
+        count: 10,
+        offset: this.list.items.length,
         access_token: this.token,
         fields: PARAM_FIELDS
       }
     })
       .then((response) => {
-        this.commit(TYPES.M_STORE_ADD_USERS, response.data['response']);
+        this.commit(TYPES.M_STORE_ADD_USERS, response.data['response']['items']);
         this.commit(TYPES.M_STORE_OK_REQUEST);
       })
       .catch((error) => {
@@ -124,8 +127,6 @@ export default class UsersStore extends TypedStore {
 
   @mutation
   [TYPES.M_STORE_ADD_USERS](newUsers: any[]) {
-    newUsers.shift();
-
     newUsers = newUsers.map((item) => {
       return {
         name: item.first_name + ' ' + item.last_name,
@@ -167,14 +168,14 @@ export default class UsersStore extends TypedStore {
 
   @mutation
   [TYPES.M_STORE_USER_DATA](data: any) {
+  console.log("AAAAAAAAA!!!!!!!!!!!!!AAAAAAAAAAAAAAAA!!!!!!!!!!!!!!!!!!!");
+    console.log(data);
     this.userData = {
       id: data.uid,
       name: `${data.first_name} ${data.last_name}`,
       img: data.photo_100,
       bdate: 'Потом',
-      city: 'Kemerovo',
-      country: 'Rus',
-      education: 'Sharaga'
+      city: data.city.title
     };
   }
 }
