@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import UsersList from '../../users/usersList';
-import UserPage from '../../users/userPage';
+import UsersList from '../../users/usersList/index';
+import UserPage from '../../users/userPage/index';
 
 Vue.use(VueRouter);
 

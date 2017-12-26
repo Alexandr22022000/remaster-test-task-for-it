@@ -1,8 +1,8 @@
 import TypedStore from '../../core/store/typedstore';
 import { action, module, mutation } from 'vuex-ts-decorators';
 import * as TYPES from './types';
-import Request from '../../core/request/index';
-import router from '../../layout/router/routers';
+import Request from '../../core/HTTP/index';
+import router from '../../core/router/routers';
 import {state, item, list, userData} from './typesData';
 import {Status, Banner} from './appState';
 

@@ -2,7 +2,7 @@ import Vue from 'vue';
 import TypedStore from './app/core/store/typedstore';
 import ApplicationStore from './app/core/store';
 import Layout from './app/layout/';
-import router from './app/layout/router/routers';
+import router from './app/core/router/routers';
 
 class Application {
 

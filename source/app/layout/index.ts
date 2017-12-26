@@ -2,7 +2,7 @@ import './style.sass';
 
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import Navbar from './navbar';
+import Navbar from '../core/components/navbar';
 
 @Component({
   template: require('./template.pug'),

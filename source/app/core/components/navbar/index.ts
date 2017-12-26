@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import {Status} from '../../users/store/appState';
+import {Status} from '../../../users/store/appState';
 import { State, Action } from 'vuex-class';
-import * as TYPES from '../../users/store/types';
+import * as TYPES from '../../../users/store/types';
 import './style.scss';
 
 @Component({
