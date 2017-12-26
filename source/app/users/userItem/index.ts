@@ -4,7 +4,7 @@ import { State, Action } from 'vuex-class';
 import * as TYPES from '../store/types';
 import {IItem} from '../store/interfaces';
 import {Prop} from "vue-property-decorator";
-// import './style.scss';
+// import './style.sass';
 import './styles.sass';
 
 @Component({

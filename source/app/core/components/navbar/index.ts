@@ -4,7 +4,7 @@ import {Status} from '../../../users/store/appState';
 import { State, Action } from 'vuex-class';
 import * as TYPES from '../../../users/store/types';
 import BackButton from '../backButton';
-import './style.scss';
+import './style.sass';
 
 @Component({
     template: require('./template.pug'),
