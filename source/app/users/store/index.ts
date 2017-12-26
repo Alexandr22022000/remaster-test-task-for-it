@@ -6,10 +6,12 @@ import router from '../../core/router/routers';
 import {IState, IList, IUserData} from './interfaces';
 import {Status, Banner} from './appState';
 import {METHOD_SEARCH, METHOD_USER, PARAM_FIELDS, PARAM_FIELDS_MORE} from '../../core/HTTP/constants';
+import Url from '../../core/url';
+import Cookie from '../../core/cookie';
 
 @module
 export default class UsersStore extends TypedStore {
-  public token: string = '6cb73bab05de52dec76af86ae08f2826e79ba1d97dae34b649860dee21979618d8214715db3873832fba7';
+  public token: string = '';
   public stateApp: IState = {
     appStatus: Status.OK,
     query: ''
@@ -30,7 +32,32 @@ export default class UsersStore extends TypedStore {
 
 
   @action
-  [TYPES.A_GET_VK_AUTH_TOKEN]() {
+  [TYPES.A_GET_VK_AUTH_TOKEN] () {
+    let token: string = Url.getParam('access_token');
+
+    if (!token) token = Cookie.getToken();
+
+    if (!token) Url.getNewToken();
+
+    this.commit(TYPES.M_STORE_START_REQUEST);
+
+    HTTP.get(METHOD_USER, {
+      params: {
+        access_token: token,
+      }
+    })
+      .then((response) => {
+        if (response.data['error']) Url.getNewToken();
+
+        Cookie.setToken(token);
+        this.commit(TYPES.M_STORE_VK_AUTH_TOKEN, token);
+        this.commit(TYPES.M_STORE_OK_REQUEST);
+      })
+      .catch((error) => {
+        console.error(error);
+        this.commit(TYPES.M_STORE_ERROR_REQUEST);
+      });
+
     this.commit(TYPES.M_STORE_VK_AUTH_TOKEN, '6cb73bab05de52dec76af86ae08f2826e79ba1d97dae34b649860dee21979618d8214715db3873832fba7');
   }
 
