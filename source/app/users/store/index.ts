@@ -1,11 +1,10 @@
 import TypedStore from '../../core/store/typedstore';
 import { action, module, mutation } from 'vuex-ts-decorators';
 import * as TYPES from './types';
-import Request, {HTTP} from '../../core/HTTP/index';
+import {HTTP} from '../../core/HTTP';
 import router from '../../core/router/routers';
-import {IState, IItem, IList, IUserData} from './interfaces';
+import {IState, IList, IUserData} from './interfaces';
 import {Status, Banner} from './appState';
-import * as moment from 'moment';
 import {METHOD_SEARCH, METHOD_USER, PARAM_FIELDS, PARAM_FIELDS_MORE} from '../../core/HTTP/constants';
 
 @module
@@ -25,9 +24,7 @@ export default class UsersStore extends TypedStore {
     name: '',
     img: '',
     bdate: '',
-    city: '',
-    country: '',
-    education: ''
+    city: ''
   };
 
 
@@ -130,7 +127,7 @@ export default class UsersStore extends TypedStore {
     newUsers = newUsers.map((item) => {
       return {
         name: item.first_name + ' ' + item.last_name,
-        id: item.uid,
+        id: item.id,
         img: item.photo_100,
       };
     });
@@ -168,14 +165,12 @@ export default class UsersStore extends TypedStore {
 
   @mutation
   [TYPES.M_STORE_USER_DATA](data: any) {
-  console.log("AAAAAAAAA!!!!!!!!!!!!!AAAAAAAAAAAAAAAA!!!!!!!!!!!!!!!!!!!");
-    console.log(data);
     this.userData = {
       id: data.uid,
       name: `${data.first_name} ${data.last_name}`,
       img: data.photo_100,
-      bdate: 'Потом',
-      city: data.city.title
+      bdate: data.bdate ? data.bdate : 'Скрыто',
+      city: data.city.title ? data.city.title : 'Скрыто'
     };
   }
 }
