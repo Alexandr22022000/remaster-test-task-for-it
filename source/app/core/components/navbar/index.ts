@@ -18,8 +18,6 @@ export default class Navbar extends Vue {
 
     @Action(TYPES.A_GET_USERS) getUsers;
 
-    @Action(TYPES.A_GO_TO_BACK) goToBack;
-
 
     @State(state => state.users.stateApp.status) appStatus: Status;
 
@@ -35,9 +33,5 @@ export default class Navbar extends Vue {
 
     search () {
       this.getUsers(this.query);
-    }
-
-    back () {
-      this.goToBack();
     }
 }
