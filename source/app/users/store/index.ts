@@ -203,7 +203,7 @@ export default class UsersStore extends TypedStore {
       name: `${data.first_name} ${data.last_name}`,
       img: data.photo_100,
       bdate: data.bdate ? data.bdate : 'Скрыто',
-      city: data.city.title ? data.city.title : 'Скрыто',
+      city: data.city ? data.city.title : 'Скрыто',
       age: (date.toString() !== 'Invalid Date') ? date.toString() : "Скрыто"
     };
   }
