@@ -1,30 +1,28 @@
 import {Status} from './appState';
 
-export type state = {
-    status: Status,
-    username: string,
-    query: string
-};
+export interface IState {
+    appStatus: Status;
+    query: string;
+}
 
-export type item = {
-    name: string,
-    img: string,
-    id: number
-};
+export interface IItem {
+    name: string;
+    img: string;
+    id: number;
+}
 
-export type list = {
-    scroll: number,
-    banner: string,
-    items: item[],
+export interface IList {
+    scroll: number;
+    banner: string;
+    items: IItem[];
+}
 
-};
-
-export type userData = {
-    id: number,
-    name: string,
-    img: string,
-    bdate: string,
-    city: string,
-    country: string,
-    education: string
-};
+export interface IUserData {
+    id: number;
+    name: string;
+    img: string;
+    bdate: string;
+    city: string;
+    country: string;
+    education: string;
+}

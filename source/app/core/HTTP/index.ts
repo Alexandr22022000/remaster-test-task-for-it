@@ -1,6 +1,6 @@
 import jsonp from 'jsonp';
 import * as REQUEST from './constants';
-import {item, userData} from '../../users/store/typesData';
+import {IItem, IUserData} from '../../users/store/typesData';
 
 export default class Requset {
   public static get (method: string, params: any, callback: (error: any, data: any) => void): void {
@@ -13,7 +13,7 @@ export default class Requset {
     jsonp(`${REQUEST.URL_VK}/${method}?${stringParam}`, null, (error, data) => callback(error, data.response));
   }
 
-  public static getUsersList (query: string, count: number, offset: number, token: string, callback: (error: any, data: item[]) => void) {
+  public static getUsersList (query: string, count: number, offset: number, token: string, callback: (error: any, data: IItem[]) => void) {
     this.get(REQUEST.METHOD_SEARCH, {
         'access_token': token,
         'q': query,
@@ -23,7 +23,7 @@ export default class Requset {
     (error, data) => {
       if (error) return callback(error, null);
 
-      let userList: item[] = [];
+      let userList: IItem[] = [];
       for (let i: number = 1; i < data.length; i++) {
         userList.push({
           name: data[i].first_name + ' ' + data[i].last_name,
@@ -36,7 +36,7 @@ export default class Requset {
     });
   }
 
-  public static getUserData (id: number, token: string, callback: (error: any, data: userData) => void) {
+  public static getUserData (id: number, token: string, callback: (error: any, data: IUserData) => void) {
     this.get(REQUEST.METHOD_USER, {
         'access_token': token,
         'fields': REQUEST.PARAM_FIELDS_MORE,
@@ -45,7 +45,7 @@ export default class Requset {
       (error, data) => {
         if (error) return callback(error, null);
 
-        let user: userData = {
+        let user: IUserData = {
           name: data[0].first_name + ' ' + data[0].last_name,
           id: data[0].uid,
           img: data[0].photo_100,

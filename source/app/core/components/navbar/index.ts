@@ -17,11 +17,11 @@ export default class Navbar extends Vue {
     @Action(TYPES.A_GO_TO_BACK) goToBack;
 
 
-    @State(state => state.users.stateApp.status) status: Status;
+    @State(state => state.users.stateApp.status) appStatus: Status;
 
 
     get getStatus(): string {
-        return this.status;
+        return this.appStatus;
     }
 
     get currentRoute(): string {

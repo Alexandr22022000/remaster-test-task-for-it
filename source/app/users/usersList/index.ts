@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { State, Action } from 'vuex-class';
-import {item} from '../store/typesData';
+import {IItem} from '../store/typesData';
 import * as TYPES from '../store/types';
 import {Banner} from '../store/appState';
 import UserItem from '../userItem';
@@ -27,7 +27,7 @@ export default class UsersList extends Vue {
     }
   }
 
-  @State(state => state.users.list.items) users: item[];
+  @State(state => state.users.list.items) users: IItem[];
 
   @State(state => state.users.list.banner) banner: Banner;
 

@@ -3,23 +3,22 @@ import { action, module, mutation } from 'vuex-ts-decorators';
 import * as TYPES from './types';
 import Request from '../../core/HTTP/index';
 import router from '../../core/router/routers';
-import {state, item, list, userData} from './typesData';
+import {IState, IItem, IList, IUserData} from './typesData';
 import {Status, Banner} from './appState';
 
 @module
 export default class UsersStore extends TypedStore {
   public token: string = '6cb73bab05de52dec76af86ae08f2826e79ba1d97dae34b649860dee21979618d8214715db3873832fba7';
-  public stateApp: state = {
-    status: Status.OK,
-    username: '',
+  public stateApp: IState = {
+    appStatus: Status.OK,
     query: ''
   };
-  public list: list = {
+  public list: IList = {
     scroll: 0,
     banner: Banner.NONE,
     items: []
   };
-  public userData: userData = {
+  public userData: IUserData = {
     id: -1,
     name: '',
     img: '',
@@ -40,7 +39,7 @@ export default class UsersStore extends TypedStore {
     this.commit(TYPES.M_STORE_QUERY, query);
     this.commit(TYPES.M_STORE_START_REQUEST);
     this.commit(TYPES.M_STORE_CLEAN_USERS_LIST);
-    Request.getUsersList(query, 10, 0, this.token, (error: any, data: item[]) => {
+    Request.getUsersList(query, 10, 0, this.token, (error: any, data: IItem[]) => {
       if (error) return this.commit(TYPES.M_STORE_ERROR_REQUEST);
 
       this.commit(TYPES.M_STORE_ADD_USERS, data);
@@ -51,7 +50,7 @@ export default class UsersStore extends TypedStore {
   @action
   [TYPES.A_GET_MORE_USERS]() {
     this.commit(TYPES.M_STORE_START_REQUEST);
-    Request.getUsersList(this.stateApp.query, 10, this.list.items.length, this.token, (error: any, data: item[]) => {
+    Request.getUsersList(this.stateApp.query, 10, this.list.items.length, this.token, (error: any, data: IItem[]) => {
       if (error) return this.commit(TYPES.M_STORE_ERROR_REQUEST);
 
       this.commit(TYPES.M_STORE_ADD_USERS, data);
@@ -68,7 +67,7 @@ export default class UsersStore extends TypedStore {
   @action
   [TYPES.A_GET_USER_DATA]() {
     this.commit(TYPES.M_STORE_START_REQUEST);
-    Request.getUserData(this.userData.id, this.token, (error: any, data: userData) => {
+    Request.getUserData(this.userData.id, this.token, (error: any, data: IUserData) => {
       if (error) return this.commit(TYPES.M_STORE_ERROR_REQUEST);
 
       this.commit(TYPES.M_STORE_USER_DATA, data);
@@ -93,7 +92,7 @@ export default class UsersStore extends TypedStore {
   }
 
   @mutation
-  [TYPES.M_STORE_ADD_USERS](newUsers: item[]) {
+  [TYPES.M_STORE_ADD_USERS](newUsers: IItem[]) {
     this.list.items = [...this.list.items, ...newUsers];
   }
 
@@ -104,19 +103,19 @@ export default class UsersStore extends TypedStore {
 
   @mutation
   [TYPES.M_STORE_ERROR_REQUEST]() {
-    this.stateApp.status = Status.ERROR;
+    this.stateApp.appStatus = Status.ERROR;
     this.list.banner = Banner.ERROR;
   }
 
   @mutation
   [TYPES.M_STORE_START_REQUEST]() {
-    this.stateApp.status = Status.REQUESTING;
+    this.stateApp.appStatus = Status.REQUESTING;
     this.list.banner = Banner.REQUESTING;
   }
 
 @mutation
   [TYPES.M_STORE_OK_REQUEST]() {
-  this.stateApp.status = Status.OK;
+  this.stateApp.appStatus = Status.OK;
   this.list.banner = Banner.NONE;
 }
 
@@ -126,7 +125,7 @@ export default class UsersStore extends TypedStore {
   }
 
   @mutation
-  [TYPES.M_STORE_USER_DATA](data: userData) {
+  [TYPES.M_STORE_USER_DATA](data: IUserData) {
     this.userData = data;
   }
 }
