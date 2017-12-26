@@ -1,10 +1,12 @@
 import TypedStore from '../../core/store/typedstore';
 import { action, module, mutation } from 'vuex-ts-decorators';
 import * as TYPES from './types';
-import Request from '../../core/HTTP/index';
+import Request, {HTTP} from '../../core/HTTP/index';
 import router from '../../core/router/routers';
-import {IState, IItem, IList, IUserData} from './typesData';
+import {IState, IItem, IList, IUserData} from './interfaces';
 import {Status, Banner} from './appState';
+import * as moment from 'moment';
+import {METHOD_SEARCH, METHOD_USER, PARAM_FIELDS, PARAM_FIELDS_MORE} from '../../core/HTTP/constants';
 
 @module
 export default class UsersStore extends TypedStore {
@@ -39,23 +41,43 @@ export default class UsersStore extends TypedStore {
     this.commit(TYPES.M_STORE_QUERY, query);
     this.commit(TYPES.M_STORE_START_REQUEST);
     this.commit(TYPES.M_STORE_CLEAN_USERS_LIST);
-    Request.getUsersList(query, 10, 0, this.token, (error: any, data: IItem[]) => {
-      if (error) return this.commit(TYPES.M_STORE_ERROR_REQUEST);
 
-      this.commit(TYPES.M_STORE_ADD_USERS, data);
-      this.commit(TYPES.M_STORE_OK_REQUEST);
-    });
-  }
+    HTTP.get(METHOD_SEARCH, {
+      params: {
+        q: query,
+        access_token: this.token,
+        fields: PARAM_FIELDS
+      }
+    })
+      .then((response) => {
+        this.commit(TYPES.M_STORE_ADD_USERS, response.data['response']);
+        this.commit(TYPES.M_STORE_OK_REQUEST);
+      })
+      .catch((error) => {
+        console.error(error);
+        this.commit(TYPES.M_STORE_ERROR_REQUEST);
+      });
+}
 
   @action
   [TYPES.A_GET_MORE_USERS]() {
     this.commit(TYPES.M_STORE_START_REQUEST);
-    Request.getUsersList(this.stateApp.query, 10, this.list.items.length, this.token, (error: any, data: IItem[]) => {
-      if (error) return this.commit(TYPES.M_STORE_ERROR_REQUEST);
 
-      this.commit(TYPES.M_STORE_ADD_USERS, data);
-      this.commit(TYPES.M_STORE_OK_REQUEST);
-    });
+    HTTP.get(METHOD_SEARCH, {
+      params: {
+        q: this.stateApp.query,
+        access_token: this.token,
+        fields: PARAM_FIELDS
+      }
+    })
+      .then((response) => {
+        this.commit(TYPES.M_STORE_ADD_USERS, response.data['response']);
+        this.commit(TYPES.M_STORE_OK_REQUEST);
+      })
+      .catch((error) => {
+        console.error(error);
+        this.commit(TYPES.M_STORE_ERROR_REQUEST);
+      });
   }
 
   @action
@@ -67,12 +89,21 @@ export default class UsersStore extends TypedStore {
   @action
   [TYPES.A_GET_USER_DATA]() {
     this.commit(TYPES.M_STORE_START_REQUEST);
-    Request.getUserData(this.userData.id, this.token, (error: any, data: IUserData) => {
-      if (error) return this.commit(TYPES.M_STORE_ERROR_REQUEST);
-
-      this.commit(TYPES.M_STORE_USER_DATA, data);
-      this.commit(TYPES.M_STORE_OK_REQUEST);
-    });
+    HTTP.get(METHOD_USER, {
+      params: {
+        user_ids: this.userData.id,
+        access_token: this.token,
+        fields: PARAM_FIELDS_MORE
+      }
+    })
+      .then((response) => {
+        this.commit(TYPES.M_STORE_USER_DATA, response.data['response'][0]);
+        this.commit(TYPES.M_STORE_OK_REQUEST);
+      })
+      .catch((error) => {
+        console.error(error);
+        this.commit(TYPES.M_STORE_ERROR_REQUEST);
+      });
   }
 
   @action
@@ -92,7 +123,17 @@ export default class UsersStore extends TypedStore {
   }
 
   @mutation
-  [TYPES.M_STORE_ADD_USERS](newUsers: IItem[]) {
+  [TYPES.M_STORE_ADD_USERS](newUsers: any[]) {
+    newUsers.shift();
+
+    newUsers = newUsers.map((item) => {
+      return {
+        name: item.first_name + ' ' + item.last_name,
+        id: item.uid,
+        img: item.photo_100,
+      };
+    });
+
     this.list.items = [...this.list.items, ...newUsers];
   }
 
@@ -113,11 +154,11 @@ export default class UsersStore extends TypedStore {
     this.list.banner = Banner.REQUESTING;
   }
 
-@mutation
-  [TYPES.M_STORE_OK_REQUEST]() {
-  this.stateApp.appStatus = Status.OK;
-  this.list.banner = Banner.NONE;
-}
+  @mutation
+    [TYPES.M_STORE_OK_REQUEST]() {
+    this.stateApp.appStatus = Status.OK;
+    this.list.banner = Banner.NONE;
+  }
 
   @mutation
   [TYPES.M_STORE_USER_ID](id: number) {
@@ -125,7 +166,15 @@ export default class UsersStore extends TypedStore {
   }
 
   @mutation
-  [TYPES.M_STORE_USER_DATA](data: IUserData) {
-    this.userData = data;
+  [TYPES.M_STORE_USER_DATA](data: any) {
+    this.userData = {
+      id: data.uid,
+      name: `${data.first_name} ${data.last_name}`,
+      img: data.photo_100,
+      bdate: 'Потом',
+      city: 'Kemerovo',
+      country: 'Rus',
+      education: 'Sharaga'
+    };
   }
 }

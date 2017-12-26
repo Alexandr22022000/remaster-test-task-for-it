@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { State, Action } from 'vuex-class';
 import * as TYPES from '../store/types';
-import {IItem} from '../store/typesData';
+import {IItem} from '../store/interfaces';
 import {Prop} from "vue-property-decorator";
 // import './style.scss';
 import './styles.sass';

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { State, Action } from 'vuex-class';
-import {IItem} from '../store/typesData';
+import {IItem} from '../store/interfaces';
 import * as TYPES from '../store/types';
 import {Banner} from '../store/appState';
 import UserItem from '../userItem';

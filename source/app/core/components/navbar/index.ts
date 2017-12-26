@@ -30,10 +30,10 @@ export default class Navbar extends Vue {
 
 
     search () {
-        this.getUsers(this.query);
+      this.getUsers(this.query);
     }
 
-    private back () {
+    back () {
       this.goToBack();
     }
 }

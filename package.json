@@ -29,6 +29,7 @@
   "devDependencies": {
     "@types/node": "^8.5.1",
     "awesome-typescript-loader": "^3.4.1",
+    "axios-jsonp": "^1.0.1",
     "consolidate": "^0.15.0",
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",
