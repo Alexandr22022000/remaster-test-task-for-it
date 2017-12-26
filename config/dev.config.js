@@ -21,7 +21,7 @@ webpackConfig.module.rules = [...webpackConfig.module.rules, {
     loader: 'css-loader',
     options: {
       sourceMap:true,
-    }    
+    }
   },{
     loader: 'postcss-loader',
     options: {
@@ -34,7 +34,7 @@ webpackConfig.module.rules = [...webpackConfig.module.rules, {
     loader: 'sass-loader',
     options: {
       sourceMap:true
-    }    
+    }
   }]
 }];
 

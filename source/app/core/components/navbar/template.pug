@@ -1,5 +1,5 @@
 div
-    button(@click="back()" v-show="currentRoute == 'UserPage'") back
+    back-button
     input#input-search(v-model="query")
     button(@click="search()") search
     h1 {{getStatus}}
