@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { State, Action } from 'vuex-class';
 import * as TYPES from '../store/types';
-import './style.scss';
+import './style.sass';
 
 @Component({
     template: require('./template.pug')
