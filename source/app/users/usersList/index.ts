@@ -15,16 +15,13 @@ import './style.scss';
 })
 
 export default class UsersList extends Vue {
-  constructor () {
-    super();
-    window.addEventListener('scroll', this.onScroll);
-  }
-
-  private onScroll () {
-    console.log(this.banner);
-    if (document.body.scrollHeight - window.innerHeight - document.scrollingElement.scrollTop <= 10 && this.banner === Banner.NONE) {
-      this.getMoreUsers();
-    }
+  mounted () {
+    let scrollingElement = document.getElementById('content__scroll');
+    scrollingElement.addEventListener('scroll', () => {
+      if (scrollingElement.scrollHeight - scrollingElement.clientHeight - scrollingElement.scrollTop <= 10 && this.banner === Banner.NONE) {
+        this.getMoreUsers();
+      }
+    });
   }
 
   @State(state => state.users.list.items) users: IItem[];
