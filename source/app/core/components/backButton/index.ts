@@ -5,7 +5,8 @@ import './style.sass';
 import * as TYPES from '../../../users/store/types';
 
 @Component({
-    template: require('./template.pug')
+    template: require('./template.pug'),
+    
 })
 
 export default class BackButton extends Vue {
@@ -16,5 +17,11 @@ export default class BackButton extends Vue {
 
   back () {
     this.goToBack();
+  }
+
+  msgBackButton : string = "You click on backButton!";
+
+  onClickBackButton(){
+    this.$emit('clickedOnBackButton', this.msgBackButton);
   }
 }
