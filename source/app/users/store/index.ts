@@ -30,7 +30,6 @@ export default class UsersStore extends TypedStore {
     age: ''
   };
 
-
   @action
   [TYPES.A_GET_VK_AUTH_TOKEN] () {
     let token: string = Url.getParam('access_token');
@@ -38,7 +37,7 @@ export default class UsersStore extends TypedStore {
     if (!token) token = Cookie.getToken();
 
     if (!token) Url.getNewToken();
-
+    
     this.commit(TYPES.M_STORE_START_REQUEST);
 
     HTTP.get(METHOD_USER, {
@@ -50,6 +49,7 @@ export default class UsersStore extends TypedStore {
         if (response.data['error']) Url.getNewToken();
 
         Cookie.setToken(token);
+        // Нафиг его в стор класть если в куки кладете уже
         this.commit(TYPES.M_STORE_VK_AUTH_TOKEN, token);
         this.commit(TYPES.M_STORE_OK_REQUEST);
       })
@@ -58,13 +58,15 @@ export default class UsersStore extends TypedStore {
         this.commit(TYPES.M_STORE_ERROR_REQUEST);
       });
 
+      // Хардкод?
     this.commit(TYPES.M_STORE_VK_AUTH_TOKEN, '6cb73bab05de52dec76af86ae08f2826e79ba1d97dae34b649860dee21979618d8214715db3873832fba7');
   }
-
+  // Этот и следующий метод выполняют одно и тоже объединить в один. Код сократиться очень сильно
   @action
   [TYPES.A_GET_USERS](query: string) {
     this.commit(TYPES.M_STORE_QUERY, query);
     this.commit(TYPES.M_STORE_START_REQUEST);
+    // Бесполезное действие
     this.commit(TYPES.M_STORE_CLEAN_USERS_LIST);
 
     HTTP.get(METHOD_SEARCH, {
@@ -109,6 +111,7 @@ export default class UsersStore extends TypedStore {
   }
 
   @action
+  // Что это за дичь. Нахера вы роутер тут мучаете?
   [TYPES.A_SET_USER_ID](id: number) {
     router.push({name: 'UserPage', params: {'id': id}});
   }
@@ -133,11 +136,11 @@ export default class UsersStore extends TypedStore {
       });
   }
 
+  // Нахера вы роутинг то через action делаете? Зачем это в сторе вообще? С какой целью?
   @action
   [TYPES.A_GO_TO_BACK]() {
     router.push({name: 'UsersList'});
   }
-
 
   @mutation
   [TYPES.M_STORE_VK_AUTH_TOKEN](token: string) {
@@ -151,6 +154,8 @@ export default class UsersStore extends TypedStore {
 
   @mutation
   [TYPES.M_STORE_ADD_USERS](newUsers: any[]) {
+    // Зачем лишний цикл?
+    // Чтобы имя склеить?
     newUsers = newUsers.map((item) => {
       return {
         name: item.first_name + ' ' + item.last_name,
@@ -162,6 +167,7 @@ export default class UsersStore extends TypedStore {
     this.list.items = [...this.list.items, ...newUsers];
   }
 
+  // Нахера?
   @mutation
   [TYPES.M_STORE_CLEAN_USERS_LIST]() {
     this.list.items = [];
@@ -187,10 +193,14 @@ export default class UsersStore extends TypedStore {
 
   @mutation
   [TYPES.M_STORE_USER_DATA](data: any) {
+    // Совет не работайте с Js датами напрямую, это та еще дичь юзайте moment
     let date: Date | number = new Date(data.bdate);
     if (date.toString() !== 'Invalid Date') {
       date = new Date().getFullYear() - date.getFullYear();
     }
+
+    // Если юы вы не поленились описать данные в интерфейсах, то все бы выглядело так
+    // this.userData = data; и все
 
     this.userData = {
       id: data.id,
@@ -202,3 +212,39 @@ export default class UsersStore extends TypedStore {
     };
   }
 }
+
+// Поясняю за интерфейсы в данном контексте. Это контракт между бэком и фронтом о наборе полей которые прилетают от бэка к фронту.
+// Т.е.
+/*
+export interface User {
+  id: number;
+
+  first_name: string;
+
+  last_name: string;
+  
+  screen_name?: string;
+
+  photo_100: string;
+}
+
+это то что возвращает vk о юзере если описать для этого интерфейс. у вас даже расширение стоит для конверта json в TS интерфейс
+
+в этом случае мы делаем вот чо
+
+let users: Array<User> = [];
+
+let user: User = {};
+
+function getUsers(InUsers: Array<User>) {
+  this.users = InUsers;
+  либо
+  this.users = this.users.concat(InUsers);
+}
+
+function getUser(InUser: User) {
+  this.user = InUser;
+}
+
+ни циклов ни map функций. нифига не надо
+*/

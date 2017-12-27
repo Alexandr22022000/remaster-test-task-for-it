@@ -1,3 +1,5 @@
+// Зачем вы лишнюю работу делаете? Поставьте либу для работы с куками. Если хотите писат ьсвое решение стандартной проблемы
+// Пишите в свободное от стажировки время
 export default class Cookie {
   public static getToken (): string {
     const cookie: string = document.cookie, name = 'token';

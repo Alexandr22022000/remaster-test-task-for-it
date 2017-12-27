@@ -16,6 +16,7 @@ import './style.scss';
 
 export default class UsersList extends Vue {
   mounted () {
+    // Вот за это плюс. Предыдущие ребята не догадались так повешать скролл ибо вушный тупит
     let scrollingElement = document.getElementById('content__scroll');
     scrollingElement.addEventListener('scroll', () => {
       if (scrollingElement.scrollHeight - scrollingElement.clientHeight - scrollingElement.scrollTop <= 10 && this.banner === Banner.NONE) {
@@ -27,7 +28,6 @@ export default class UsersList extends Vue {
   @State(state => state.users.list.items) users: IItem[];
 
   @State(state => state.users.list.banner) banner: Banner;
-
 
   @Action(TYPES.A_GET_MORE_USERS) getMoreUsers;
 

@@ -1,5 +1,6 @@
 $arrow-height: 50px / 5 * 3
 
+// Юзать тире не удобно. если надо выделить весь класс двойным кликом то нижнее подчеркивание решает
 .go-to-back
   cursor: pointer
   display: inline-block
@@ -16,6 +17,8 @@ $arrow-height: 50px / 5 * 3
   float: left
 
   transform: rotate(90deg) translate(0px, 25px)
+
+  // Автопрефиксер, тогда зачем, если вы их пишете сами
   -webkit-transform: rotate(90deg) translate(0px, 25px)
   -moz-transform: rotate(90deg) translate(0px, 25px)
   -o-transform: rotate(90deg) translate(0px, 25px)

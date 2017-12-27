@@ -1,3 +1,4 @@
+// Я даже разбираться не хочу в том что это и зачем этот велосипед
 export default class Url {
   public static getParam (param: string): string {
     param = param + '=';

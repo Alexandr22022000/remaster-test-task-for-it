@@ -11,6 +11,7 @@ import './style.sass';
 export default class UserPage extends Vue {
   @Action(TYPES.A_GET_USER_DATA) getUserData;
 
+  // Госпади. Нахуя? просто вынь юзера из стора и обращайся к его полям
   @State(state => state.users.userData.name) name: string;
 
   @State(state => state.users.userData.img) img: string;

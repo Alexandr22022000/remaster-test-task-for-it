@@ -11,6 +11,7 @@ import './styles.sass';
   template: require('./template.pug')
 })
 
+// В чем смысл этого компонента? Вообще не ясно нафига он впринципе
 export default class UserItem extends Vue {
   @Action(TYPES.A_SET_USER_ID) getUser;
 

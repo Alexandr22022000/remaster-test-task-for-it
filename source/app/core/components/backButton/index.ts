@@ -9,6 +9,9 @@ import * as TYPES from '../../../users/store/types';
 })
 
 export default class BackButton extends Vue {
+  // Убрать. Я писал что такие компоненты должны только делать emit события, глобальной зависимости от приложения тут не должно быть,
+  // в силу того что они должны иметь возможность переиспользоваться
+  // Здесь должно быть только что-то типа onClickHandler() { this.$emit('clicked', anyData); }
   @Action(TYPES.A_GO_TO_BACK) goToBack;
 
   back () {

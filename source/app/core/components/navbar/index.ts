@@ -14,6 +14,10 @@ import './style.sass';
 })
 
 export default class Navbar extends Vue {
+    // причем здесь навбар если это поиск?
+    // Этот функционал должен быть в списке пользователей а не здесь
+    // Убрать нафиг
+
     private query: string = '';
 
     @Action(TYPES.A_GET_USERS) getUsers;
@@ -21,7 +25,6 @@ export default class Navbar extends Vue {
     @Action(TYPES.A_GO_TO_BACK) goToBack;
 
     @State(state => state.users.stateApp.status) appStatus: Status;
-
 
     get getStatus(): string {
         return this.appStatus;
