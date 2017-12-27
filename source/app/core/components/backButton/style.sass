@@ -1,0 +1,31 @@
+$arrow-height: 50px / 5 * 3
+
+.go-to-back
+  cursor: pointer
+  display: inline-block
+  margin: 5px 5px
+  border-right: 2px solid #000
+
+.go-to-back__arrow
+  width: 0
+  height: 0
+  border: (50px / 2) solid transparent
+  border-top-color: #AAA
+  margin: 0
+  padding: 0
+  float: left
+
+  transform: rotate(90deg) translate(0px, 25px)
+  -webkit-transform: rotate(90deg) translate(0px, 25px)
+  -moz-transform: rotate(90deg) translate(0px, 25px)
+  -o-transform: rotate(90deg) translate(0px, 25px)
+  -ms-transform: rotate(90deg) translate(0px, 25px)
+
+.go-to-back__arrow:before
+  content: ''
+  width: 0
+  height: 0
+  border: (50px / 5 * 3 / 2) solid transparent
+  border-top-color: #555555
+  display: inline-block
+  -webkit-transform: translate(-15px, -25px)

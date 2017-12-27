@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Action } from 'vuex-class';
-import './style.scss';
+import './style.sass';
 import * as TYPES from '../../../users/store/types';
 
 @Component({
