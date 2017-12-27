@@ -23,8 +23,7 @@ export default class UserPage extends Vue {
 
   @State(state => state.users.userData.age) age: string;
 
-  constructor () {
-    super();
-    this.getUserData();
+  beforeMount () {
+    this.getUserData(this.$route.params.id);
   }
 }

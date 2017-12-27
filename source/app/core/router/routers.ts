@@ -13,7 +13,7 @@ export default new VueRouter({
             component: UsersList
         },
         {
-            path: '/user',
+            path: '/user/:id',
             name: 'UserPage',
             component: UserPage
         }

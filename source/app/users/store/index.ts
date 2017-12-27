@@ -110,16 +110,15 @@ export default class UsersStore extends TypedStore {
 
   @action
   [TYPES.A_SET_USER_ID](id: number) {
-    router.push({name: 'UserPage'});
-    this.commit(TYPES.M_STORE_USER_ID, id);
+    router.push({name: 'UserPage', params: {'id': id}});
   }
 
   @action
-  [TYPES.A_GET_USER_DATA]() {
+  [TYPES.A_GET_USER_DATA](id: number) {
     this.commit(TYPES.M_STORE_START_REQUEST);
     HTTP.get(METHOD_USER, {
       params: {
-        user_ids: this.userData.id,
+        user_ids: id,
         access_token: this.token,
         fields: PARAM_FIELDS_MORE
       }
@@ -184,11 +183,6 @@ export default class UsersStore extends TypedStore {
     [TYPES.M_STORE_OK_REQUEST]() {
     this.stateApp.appStatus = Status.OK;
     this.list.banner = Banner.NONE;
-  }
-
-  @mutation
-  [TYPES.M_STORE_USER_ID](id: number) {
-    this.userData.id = id;
   }
 
   @mutation
