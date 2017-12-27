@@ -1,7 +1,7 @@
 div.navigation-bar
   div.navigation-bar__container
     div.navigation-bar__left
-      back-button
+      back-button(v-show="currentRoute == 'UserPage'")
     div.navigation-bar__left
       div.user-data
         h1.user-data__text
@@ -10,5 +10,5 @@ div.navigation-bar
         h1 {{getStatus}}
     div.navigation-bar__right
       div.search
-        input.search__input#input-search(v-model="query")
+        input.search__input#input-search(@input="goToBack()" v-model="query")
         button(@click="search()") search
