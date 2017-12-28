@@ -205,7 +205,7 @@ export default class UsersStore extends TypedStore {
     this.userData = {
       id: data.id,
       name: `${data.first_name} ${data.last_name}`,
-      img: data.photo_100,
+      img: data.photo_400_orig ? data.photo_400_orig : 'Нет фото',
       bdate: data.bdate ? data.bdate : 'Скрыто',
       city: data.city ? data.city.title : 'Скрыто',
       age: (date.toString() !== 'Invalid Date') ? date.toString() : "Скрыто"
