@@ -114,7 +114,7 @@ export default class UsersStore extends TypedStore {
   @action
   // Что это за дичь. Нахера вы роутер тут мучаете?
   [TYPES.A_SET_USER_ID](id: number) {
-    router.push({name: 'UserPage', params: {'id': id}});
+    router.push({name: 'UserPage', params: {'id': id.toString()}});
   }
 
   @action

@@ -12,7 +12,7 @@ module.exports = {
   },
   output: {
     path: helpers.root('/build'),
-    filename: '[name].[hash].js',
+    filename: '[name].js',
     publicPath: publicPath
   },
   resolve: {
@@ -27,29 +27,29 @@ module.exports = {
     rules: [{
       test: /\.pug$/,
       enforce: 'pre',
-      loader: 'template-html-loader'      
+      loader: 'template-html-loader'
     },{
       test: /\.ts$/,
       exclude: /node_modules/,
-      enforce: 'pre',  
+      enforce: 'pre',
       use: [{
         loader: 'tslint-loader'
-      }]       
+      }]
     },{
       test: /\.modernizrrc$/,
       loader: 'webpack-modernizr-loader?useConfigFile',
     },{
       test: /\.vue$/,
-      loader: 'vue-loader'      
+      loader: 'vue-loader'
     },{
       test: /\.ts$/,
       include: [
         helpers.root('/source'),
         helpers.root('/node_modules/vuex-ts-decorators')
-      ],      
+      ],
       use: [{
         loader: 'awesome-typescript-loader'
-      }]       
+      }]
     },{
       test: /\.(png|jpg|gif|svg)$/i,
       use: [{
