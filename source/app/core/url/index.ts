@@ -20,7 +20,7 @@ export default class Url {
     let end: number = url.indexOf('/', 8);
     end = (end === -1) ? url.length : end;
     url = url.substring(0, end);
-    url = (url.indexOf('test-hosting-00', 0) === -1) ? url : (url + '/remaster-task-for-it');
+    url = (url.indexOf('test-hosting-00', 0) === -1) ? url : (url + '/vk-api');
     return url;
   }
 }
