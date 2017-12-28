@@ -14,6 +14,7 @@ export interface IItem {
 export interface IList {
     scroll: number;
     banner: string;
+    usersCount: number;
     items: IItem[];
 }
 

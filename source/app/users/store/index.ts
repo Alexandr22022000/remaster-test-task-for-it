@@ -18,6 +18,7 @@ export default class UsersStore extends TypedStore {
   };
   public list: IList = {
     scroll: 0,
+    usersCount: 0,
     banner: Banner.NONE,
     items: []
   };
@@ -37,7 +38,7 @@ export default class UsersStore extends TypedStore {
     if (!token) token = Cookie.getToken();
 
     if (!token) Url.getNewToken();
-    
+
     this.commit(TYPES.M_STORE_START_REQUEST);
 
     HTTP.get(METHOD_USER, {
@@ -95,7 +96,7 @@ export default class UsersStore extends TypedStore {
       params: {
         q: this.stateApp.query,
         count: 10,
-        offset: this.list.items.length,
+        offset: this.list.usersCount,
         access_token: this.token,
         fields: PARAM_FIELDS
       }
@@ -154,6 +155,7 @@ export default class UsersStore extends TypedStore {
 
   @mutation
   [TYPES.M_STORE_ADD_USERS](newUsers: any[]) {
+    this.list.usersCount += 10;
     // Зачем лишний цикл?
     // Чтобы имя склеить?
     newUsers = newUsers.map((item) => {
@@ -222,7 +224,7 @@ export interface User {
   first_name: string;
 
   last_name: string;
-  
+
   screen_name?: string;
 
   photo_100: string;
