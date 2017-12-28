@@ -10,5 +10,4 @@ div.navigation-bar
         h1 {{getStatus}}
     div.navigation-bar__right
       div.search
-        input.search__input#input-search(@input="goToBack()" v-model="query")
-        button(@click="search()") search
+        input.search__input#input-search(@input="goToBack()" v-model="query" v-on:keyup.13="search()")
